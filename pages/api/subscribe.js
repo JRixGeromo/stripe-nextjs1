@@ -15,9 +15,9 @@ export default async function handler(req, res) {
       invoice_settings: { default_payment_method: paymentMethod },
     });
     // Create a product
-    const product = await stripe.products.create({
-      name: "Monthly subscription",
-    });
+    // const product = await stripe.products.create({
+    //   name: "Monthly subscription",
+    // });
     // Create a subscription
     const subscription = await stripe.subscriptions.create({
       customer: customer.id,
