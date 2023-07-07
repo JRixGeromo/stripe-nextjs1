@@ -33,9 +33,26 @@ function PaymentForm() {
       });
       if (!response.ok) return alert("Payment unsuccessful!");
       const data = await response.json();
-      const confirm = await stripe.confirmCardPayment(data.clientSecret);
+      console.log("data");
+      console.log(data);
+      /*
+      const confirm = await stripe.confirmCardPayment(data.clientSecret, {
+        payment_method: {
+          card: elements.getElement("card"),
+          // billing_details: {
+          //   name: 'Jose Rico Geromo',
+          // },
+        },
+      });
+      */
+      const confirm = await stripe.retrievePaymentIntent(data.clientSecret);
+     
+
       if (confirm.error) return alert("Payment unsuccessful!");
+      console.log("confirm");
+      console.log(confirm);
       alert("Payment Successful! Subscription active.");
+
     } catch (err) {
       console.error(err);
       alert("Payment failed! " + err.message);
